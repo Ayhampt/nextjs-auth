@@ -5,12 +5,8 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import axios from "axios";
 
-
-
-
-export default function ProfilePage() {
+export default function ProfilePage({params}:any) {
   const router = useRouter();
-  const [data, setData] = React.useState('nothing')
   const logout = async () => {
     try {
       await axios.get("/api/users/logout");
@@ -22,19 +18,6 @@ export default function ProfilePage() {
     }
   };
 
-  const getUserDetails = async () => {
-    try {
-      const response = await axios.get("/api/users/me");
-      console.log(response.data);
-      setData(response.data.data._id)
-      toast.success("detais fectched successful");
-    } catch (error: any) {
-      console.log(error.message);
-      toast.error(error.message);
-    }
-  };
-
-  
   return (
     <div className="flex flex-wrap justify-center items-center h-screen m-10">
       <div className=" relative max-w-md mx-auto md:max-w-2xl min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-xl">
@@ -74,10 +57,7 @@ export default function ProfilePage() {
           </div>
           <div className="text-center mt-2">
             <h3 className="text-2xl text-slate-700 font-bold leading-normal mb-1">
-              ayham
-            </h3>
-            <h3 className="text-xl text-slate-700 font-bold leading-normal mb-1">
-              {data === 'nothing' ? "nothing" : <Link href={`/profile/${data}`}>{data}</Link>}
+              {params.id}
             </h3>
             <div className="text-xs mt-0 mb-2 text-slate-400 font-bold uppercase">
               <i className="fas fa-map-marker-alt mr-2 text-slate-400 opacity-75"></i>
@@ -109,15 +89,6 @@ export default function ProfilePage() {
                     Logout
                   </button>
                 </div>
-                <div className="mt-6">
-                  <button
-                    onClick={getUserDetails}
-                    className="bg-green-800 text-white active:bg-amber-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none hover:bg-amber-600 focus:outline-none mr-1 ease-linear transition-all duration-150 cursor-pointer"
-                    type="button"
-                  >
-                    get details
-                  </button>
-                </div>
               </div>
             </div>
           </div>
@@ -126,5 +97,3 @@ export default function ProfilePage() {
     </div>
   );
 }
-
-

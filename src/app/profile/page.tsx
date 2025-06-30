@@ -8,6 +8,7 @@ import axios from "axios";
 
 
 
+
 export default function ProfilePage() {
   const router = useRouter();
   const [data, setData] = React.useState('nothing')
@@ -77,7 +78,11 @@ export default function ProfilePage() {
               ayham
             </h3>
             <h3 className="text-xl text-slate-700 font-bold leading-normal mb-1">
-              {data === 'nothing' ? "nothing" : <Link href={`/profile/${data}`}>{data}</Link>}
+              {data === "nothing" ? (
+                "nothing"
+              ) : (
+                <Link href={`/profile/${data}`}>{data}</Link>
+              )}
             </h3>
             <div className="text-xs mt-0 mb-2 text-slate-400 font-bold uppercase">
               <i className="fas fa-map-marker-alt mr-2 text-slate-400 opacity-75"></i>
@@ -118,6 +123,7 @@ export default function ProfilePage() {
                     get details
                   </button>
                 </div>
+                
               </div>
             </div>
           </div>

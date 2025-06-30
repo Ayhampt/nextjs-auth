@@ -1,10 +1,9 @@
 "use client";
-import React, {useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import  axios  from "axios";
+import axios from "axios";
 import toast from "react-hot-toast";
-
 
 export default function LoginPage() {
   const [user, setuser] = useState({
@@ -12,12 +11,10 @@ export default function LoginPage() {
     password: "",
   });
   const [loading, setLoading] = React.useState(false);
-  
-  ;
+
   const router = useRouter();
   const onLogin = async () => {
     try {
-      
       const response = await axios.post("/api/users/login", user);
       console.log("Login success", response.data);
       toast.success("Login successful");
@@ -25,12 +22,10 @@ export default function LoginPage() {
     } catch (error: any) {
       console.log("Login failed", error);
       toast.error("Login failed");
-    }finally{
+    } finally {
       setLoading(false);
     }
   };
-
-  
 
   return (
     <div className="flex flex-col items-center justify-center h-screen px-6 py-8 mb-2 mx-auto md:h-screen lg:py-0">
@@ -53,7 +48,7 @@ export default function LoginPage() {
               id="email"
               value={user.email}
               onChange={(e) => setuser({ ...user, email: e.target.value })}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-emailInputgray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="name@company.com"
             />
           </div>
@@ -90,6 +85,14 @@ export default function LoginPage() {
               create an account
             </Link>
           </p>
+          <div className="mt-6">
+            <Link
+              href="/emailInput"
+              className="bg-blue-500 text-white active:bg-amber-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none hover:bg-black focus:outline-none mr-1 ease-linear transition-all duration-150 cursor-pointer"
+            >
+              forgot password?change now
+            </Link>
+          </div>
         </div>
       </div>
     </div>
